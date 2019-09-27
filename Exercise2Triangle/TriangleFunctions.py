@@ -92,7 +92,7 @@ def build_solution(source_triangle, solution_triangle):
         next_element = solution_triangle[row_counter][next_element]
     return solution, source_triangle_masked
 
-def print_triangle(triangle, dot_visualisation):
+def print_triangle(triangle, dot_visualisation, blank_zeros):
     # Scan the triangle to figure out the maximum number of characters in an element
     maximum_value = 0
     triangle_depth = len(triangle)
@@ -110,7 +110,7 @@ def print_triangle(triangle, dot_visualisation):
     # Print each line out applying initial indent and then spacing between elements as appropriate
     for row_count in range (0, triangle_depth):
         if dot_visualisation:
-            indent = int((triangle_depth - row_count - 1) / 2)
+            indent = int((triangle_depth - row_count) / 2)
         else:
             indent = (triangle_depth - row_count - 1) * (maximum_digits - offset)
         print(' ' * indent, end='', sep='')
@@ -123,7 +123,7 @@ def print_triangle(triangle, dot_visualisation):
             spacer = maximum_digits - 2
         for element_count in range(0, len(triangle[row_count])):
             element_value = triangle[row_count][element_count]
-            if element_value == 0:
+            if blank_zeros and (element_value == 0):
                 if dot_visualisation or (maximum_digits == 1):
                     element = '.'
                 else: 
