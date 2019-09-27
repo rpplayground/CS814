@@ -6,7 +6,7 @@
 import math
 
 # This function reads in a text file that contains a triangle
-def read_triangle__from_file(path, file_name):
+def read_triangle_from_file(path, file_name):
     # Construct fully specified name
     file_to_open = path + file_name
     # Open the file in read mode
