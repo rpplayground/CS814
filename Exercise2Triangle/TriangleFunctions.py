@@ -92,7 +92,7 @@ def build_solution(source_triangle, solution_triangle):
         next_element = solution_triangle[row_counter][next_element]
     return solution, source_triangle_masked
 
-def print_triangle(triangle):
+def print_triangle(triangle, dot_visualisation):
     # Scan the triangle to figure out the maximum number of characters in an element
     maximum_value = 0
     triangle_depth = len(triangle)
@@ -101,27 +101,37 @@ def print_triangle(triangle):
         if maximum_value_in_row > maximum_value:
             maximum_value = maximum_value_in_row
     maximum_digits = int(math.log10(maximum_value)) + 1
-    print('Maximum value found:', maximum_value, ' digits: ', maximum_digits)
-    # Calculate the cell spacing
-    cell_spacing = maximum_digits - 2
-    # Calulcate the offset
+    print('Maximum value found:', maximum_value, ' depth: ', triangle_depth)
+    # Calulcate the offset - not quite sure why this is needed, but it just works to bring everything into line...
     if maximum_digits <= 2:
         offset = 0
     else:
         offset = 1
-    # Print each line out applying initial ident and spacing as appropriate
+    # Print each line out applying initial indent and then spacing between elements as appropriate
     for row_count in range (0, triangle_depth):
-        indent = (triangle_depth - row_count - 1) * (maximum_digits - offset)
+        if dot_visualisation:
+            indent = int((triangle_depth - row_count - 1) / 2)
+        else:
+            indent = (triangle_depth - row_count - 1) * (maximum_digits - offset)
         print(' ' * indent, end='', sep='')
         spacer = 0
-        if maximum_digits <= 2:
+        if dot_visualisation:
+            spacer = 0
+        elif maximum_digits <= 2:
             spacer = maximum_digits
         else:
             spacer = maximum_digits - 2
         for element_count in range(0, len(triangle[row_count])):
-            if triangle[row_count][element_count] == 0:
-                element = '[' + (' ' * (maximum_digits - 2)) + ']'
+            element_value = triangle[row_count][element_count]
+            if element_value == 0:
+                if dot_visualisation or (maximum_digits == 1):
+                    element = '.'
+                else: 
+                    element = '[' + (' ' * (maximum_digits - 2)) + ']'
             else:
-                element = str(triangle[row_count][element_count]).zfill(maximum_digits)
+                if dot_visualisation:
+                    element = 'X'
+                else:
+                    element = str(triangle[row_count][element_count]).zfill(maximum_digits)
             print(element, ' ' * (spacer), end='', sep='')
         print('', flush=True)
