@@ -65,7 +65,8 @@ def roll_up_triangle_from_bottom(source_triangle):
         # Insert the new row into the start of the rolled up sum list to build the triangle back up from bottom to top
         rolled_up_sum_triangle.insert(0, rolled_up_sum_line_builder)
         solution_triangle.insert(0, solution_line_builder)
-    return rolled_up_sum_triangle, solution_triangle
+        max_sum = rolled_up_sum_triangle[0][0]
+    return rolled_up_sum_triangle, solution_triangle, max_sum
     
 # This function then decodes the solution triangle into a set of coordinates that walks you through the optimal solution, it also publishes a "masked version" of the source triangle
 def build_solution(source_triangle, solution_triangle):
@@ -125,21 +126,3 @@ def print_triangle(triangle):
                 element = str(triangle[row_count][element_count]).zfill(maximum_digits)
             print(element, ' ' * (spacer), end='', sep='')
         print('', flush=True)
-        
-
-triangle_list_from_file = open_triangle_file("triangle_numbers_1.txt")
-
-rolled_up_sum_triangle, solution_triangle = roll_up_triangle_from_bottom(triangle_list_from_file)
-
-solution_path, source_triangle_masked = build_solution(triangle_list_from_file, solution_triangle)
-
-print_triangle(triangle_list_from_file)
-
-print_triangle(rolled_up_sum_triangle)
-
-print_triangle(source_triangle_masked)
-
-print('--- Maximum sum:', rolled_up_sum_triangle[0][0])
-print('--- Solution:')
-for i in range (0, len(solution_path)):
-    print(solution_path[i])
