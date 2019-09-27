@@ -6,10 +6,9 @@
 import math
 
 # This function reads in a text file that contains a triangle
-def open_triangle_file(file_name):
+def read_triangle__from_file(path, file_name):
     # Construct fully specified name
-    file_path = "c:/Users/Barry/Documents/GitHub/CS814/Exercise2Triangle/"
-    file_to_open = file_path + file_name
+    file_to_open = path + file_name
     # Open the file in read mode
     file = open(file_to_open, "r")
     # Prepare empty list into which we'll inject the data from the file
