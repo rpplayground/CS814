@@ -1,6 +1,6 @@
-from TriangleFunctions import *
+from triangle_functions import *
 
-triangle_list_from_file = read_triangle_from_file("c:/Users/Barry/Documents/GitHub/CS814/Exercise2Triangle/", "triangle_numbers_1.txt")
+triangle_list_from_file = read_triangle_from_file("c:/Users/Barry/Documents/GitHub/CS814/exercise2_triangles/", "triangle_numbers_0.txt")
 
 rolled_up_sum_triangle, solution_triangle, max_sum = roll_up_triangle_from_bottom(triangle_list_from_file)
 
