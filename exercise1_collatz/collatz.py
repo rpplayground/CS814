@@ -63,4 +63,4 @@ df = pd.DataFrame(results, columns = ['seed' , 'sequenceLength'])
 df.head(10)
 
 #%%
-df.plot.line(x='seed', y='sequenceLength', alpha = 0.2)
+df.plot.scatter(x='seed', y='sequenceLength', alpha = 0.2)
