@@ -5,10 +5,10 @@
 # File Created first created 24th September 2019 by Barry Smart.
 # 
 #### ABOUT:
-# This file walks through the examples set out in the X.pdf.
+# This file walks through the examples set out in the XXX.pdf.
 
 #%%
-# First define the function that, given a positive integer n, will return the length of the reslt Collatz sequence
+# A function that, given a positive integer n, will return the length of the reslt Collatz sequence
 def calculate_length_of_collatz_sequence (n):
     #TODO : check n is a positive integer?
     sequence_length = 1
@@ -28,7 +28,7 @@ def calculate_length_of_collatz_sequence (n):
     return sequence_length
 
 #%%
-# This function that steps through positive integers in a range and computes the Collatz sequence lenth for each.
+# A function that steps through positive integers in a definted range and computes the Collatz sequence lenth for each.
 # It then returns the maximum Collatz sequence length found, the "seed" that generated that sequence and a list containing all of the pairs to enable visualisation of the result.
 def find_biggest_sequence(starting_integer, ending_integer):
     #TODO check that starting_integer is lower than ending_integer, and both are integers
@@ -63,4 +63,13 @@ df = pd.DataFrame(results, columns = ['seed' , 'sequenceLength'])
 df.head(10)
 
 #%%
-df.plot.scatter(x='seed', y='sequenceLength', alpha = 0.2)
+# Describe the data set
+df['sequenceLength'].describe()
+
+#%%
+# Random sample the results to get something that is more manageable to plot?
+sampled_df = df.sample(n=1000)
+
+#%%
+sampled_df.plot.scatter(x='seed', y='sequenceLength', alpha = 0.2)
+
