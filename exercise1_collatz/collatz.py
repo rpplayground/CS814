@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 #%% [markdown]
-### 
+#### Create core function
 # Create a function that, given a positive integer n, will return the length of the reslt Collatz sequence.
 
 #%%
@@ -36,6 +36,7 @@ def calculate_length_of_collatz_sequence (n):
     return sequence_length
 
 #%% [markdown]
+#### Create function to iterate and find maximum
 # Create a function that steps through positive integers in a definted range and computes the Collatz sequence lenth for each.
 # 
 # It then returns the maximum Collatz sequence length found, the "seed" that generated that sequence and a list containing all of the pairs to enable visualisation of the result.
@@ -59,6 +60,7 @@ def find_biggest_sequence(starting_integer, ending_integer):
     return largest_sequence_seed, largest_sequence_length, result_list
 
 #%%
+#### Find largest Collatz sequence between 1 and 100,000
 # Call the function to discover the largest sequence length between 1 and 100,000.    
 start = 1
 end = 100000
@@ -70,7 +72,8 @@ print("The largest Collatz sequence between", start, "and", end, "is", length, "
 # Further exploratation of how the Collatz sequence behaves.
 
 #%% [markdown]
-# Create a function that will visualise the Collatz sequence develops as we step through the sequence.
+#### Function to plot Collatz sequence length over range
+# Create a function that will visualise how the Collatz sequence develops as we step through the sequence.
 
 #%%
 def plot_collatz(data_frame, max_size):
@@ -81,6 +84,7 @@ def plot_collatz(data_frame, max_size):
 
 
 #%% [markdown]
+#### Exploratory Data Analysis
 # Turn the results into a dataframe and set column titles.
 # 
 # Then Check the data frame that has been created is as expected.
@@ -117,5 +121,3 @@ print("The largest Collatz sequence between", start, "and", end, "is", length, "
 df = pd.DataFrame(results, columns = ['seed' , 'sequence_length'])
 plot_collatz(df, 1000)
 
-
-#%%
