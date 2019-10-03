@@ -1,6 +1,10 @@
-from next_states_function import get_next_states
+#%%
+from exercise3_MIU.next_states_function import next_states
 
-next_states = get_next_states("MI")
+#%%
+next_states("MI")
 
-print(next_states)
+#%%
+next_states("MII")
+
 
