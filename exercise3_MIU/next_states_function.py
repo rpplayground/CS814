@@ -11,53 +11,68 @@
 # I've chosen to use regular expressions to test for each of the rules
 import re
 
-def get_next_states(current_state):
-    # First set up the patterns we are trying to match against:
-    # Fist rule is that any string ending in an I can have a U added to it
-    # xI -> xIU
-    pattern_rule_1 = 'I$'
-    # Second rule is that any string beginning in M can have the remainder of the string "doubled"
-    # Mx -> Mxx
-    pattern_rule_2 = '^M'
-    # The third rule is that any string with three consecutive I's can be replaced with U - including at the end of the string!
-    # xIIIy -> xUy, where y can be an empty string
-    pattern_rule_3 = 'III'
-    # The fourth rule is that any two consecutive U's can be deleted
-    pattern_rule_4 = 'UU'
-
+def next_states(s, source_level = 0, element_counter = 0):
+    #TODO - check s is a string containing only characters M, I or U.
     # Set up the empty list for the return result
     list_of_next_states = []
+    list_of_next_states_details = []
 
-    # Test against rule 1
-    result_rule_1 = re.findall(pattern_rule_1, current_state)
-    number_of_results_1 = len(result_rule_1)
-    print('Pattern 1 result:', result_rule_1)
-    if number_of_results_1 == 1:
-        list_of_next_states.append(current_state + "U")
-    elif number_of_results_1 > 1:
-        print("Something has gone wrong with rule 1!")
+    # Rule 1
+    # Fist rule is that any string ending in an I can have a U added to it:
+    # xI -> xIU
+    # This rule is singular - ie, if it applies it will only either none or one entry to the agenda.
+    # Check if the last character in the current state is an I, if so append a U
+    if s[-1] == "I":
+        next_state_rule1 = s + "U"
+        list_of_next_states.append(next_state_rule1)
+        list_of_next_states_details.append([source_level, element_counter, "R1", next_state_rule1])
 
-    # Test against rule 2
-    result_rule_2 = re.findall(pattern_rule_2, current_state)
-    number_of_results_2 = len(result_rule_2)
-    print('Pattern 2 result:', result_rule_2)
-    if len(result_rule_2) == 1:
-        string_to_multiply = re.split(pattern_rule_2, current_state)
-        string_to_multiply = list(filter(None, string_to_multiply))[0]
-        list_of_next_states.append("M" + (string_to_multiply * 2))
-    elif number_of_results_2 > 1:
-        print("Something has gone wrong with rule 2!")
+    # Rule 2
+    # Second rule is that any string beginning in M can have the remainder of the string "doubled":
+    # Mx -> Mxx
+    # This rule will always apply assuming that the "axiom" for this will always be MI.
+    # Check if the first character is an M, if so "double" the remaining part of the string
+    if s[0] == "M":
+        string_to_multiply = s[1:]
+        next_state_rule2 = "M" + (2 * string_to_multiply)
+        list_of_next_states.append(next_state_rule2)
+        list_of_next_states_details.append([source_level, element_counter, "R2", next_state_rule2])
     
+    # Rule 3
+    # The third rule is that any string with three consecutive I's can be replaced with U - including at the end of the string!:
+    # xIIIy -> xUy, where y can be an empty string
+    # This rule potentially returns multiple matches - ie, so it could contribute multiple entries to the agenda.
+    start_index = 0
+    find_index_list = []
+    while s.find('III', start_index) > 0:
+        find_index = s.find('III', start_index)
+        find_index_list.append(find_index)
+        start_index = find_index + 1
+    for index in find_index_list:
+        start = index
+        end = index + 3
+        next_state_rule3 = s[:start] + "U" + s[end:]
+        list_of_next_states.append(next_state_rule3)
+        list_of_next_states_details.append([source_level, element_counter, "R3", next_state_rule3])
 
-
-
-
-    # Test against rule 2
-
-    # Test against rule 3
-
-    # Test against rule 4
-
+    # Rule 4
+    # The fourth rule is that any two consecutive U's can be deleted
+    # xUUy -> xy
+    start_index = 0
+    find_index_list = []
+    while s.find('UU', start_index) > 0:
+        find_index = s.find('UU', start_index)
+        find_index_list.append(find_index)
+        start_index = find_index + 1
+    for index in find_index_list:
+        start = index
+        end = index + 3
+        next_state_rule3 = s[:start] + "" + s[end:]
+        list_of_next_states.append(next_state_rule3)
+        list_of_next_states_details.append([source_level, element_counter, "R3", next_state_rule3])
+    
     # Check for duplicates...
 
-    return list_of_next_states
+    return list_of_next_states, list_of_next_states_details
+
+next_states("MIIII")
