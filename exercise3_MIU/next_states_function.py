@@ -73,6 +73,6 @@ def next_states(s, source_level = 0, element_counter = 0):
     
     # Check for duplicates...
 
-    return list_of_next_states, list_of_next_states_details
+    return list_of_next_states
 
 next_states("MIIII")
