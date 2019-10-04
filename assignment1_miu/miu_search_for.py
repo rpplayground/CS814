@@ -40,7 +40,3 @@ def search_for(theorem, axiom = "MI"):
     # Calculate the number of steps taken
     number_of_steps = len(route_to_state_from_axiom)
     return axiom, theorem, route_to_state_from_axiom, number_of_steps
-
-axiom, theorem, route_to_state_from_axiom, number_of_steps = search_for("MIIU")
-
-print(axiom, theorem, route_to_state_from_axiom, number_of_steps)

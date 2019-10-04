@@ -1,6 +1,11 @@
 import pytest
 from .miu_next_states import next_states as next_states
 
+def test_next_states_from_list():
+    test_list = [["MI", ["MIU", "MII"]], ["MIU", ["MIUIU"]], ["MII", ["MIIU", "MIIII"]]]
+    for item in test_list:
+        assert set(next_states(item[0])[0]) == set(item[1])
+
 def test_next_states_level0():
     assert next_states("MI")[0] == ["MIU", "MII"]
 
