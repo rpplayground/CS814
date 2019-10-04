@@ -1,12 +1,12 @@
-# University of Strathclyde
-# MSc Artificial Intelligence and Applications
-# Barry Smart
+# University of Strathclyde - MSc Artificial Intelligence and Applications
 # CS814 - Artificial Intelligence for Autonomous Systems
-# Exercise 3 - MUI
-# File Created - 1st October 2019
+# Assignment 1 - MUI
+# File Created - 1st October 2019 - Barry Smart
 # 
 # ABOUT:
-# This file contains the function that, given a current state, computes next possible states based on a set of 4 rules
+# This file contains the function that, given a current state, computes next possible states based on a set of 4 rules.
+# See body of function for description of each rule.
+# The function returns a simple list of possible next states AND a more complex list that rolls up the route to each of those states.
 
 # I've chosen to use regular expressions to test for each of the rules
 import re

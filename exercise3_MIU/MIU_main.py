@@ -1,4 +1,14 @@
-from next_states_function import next_states
+# University of Strathclyde - MSc Artificial Intelligence and Applications
+# CS814 - Artificial Intelligence for Autonomous Systems
+# Assignment 1 - MUI
+# File Created - 4th October 2019 - Barry Smart
+
+# ABOUT:
+# This is the main for the MIU assignment.  See:
+# - associated notebook for insights into how this performs;
+# - assocaited set of pytest unit tests.
+
+from MIU_next_states import next_states
 
 def search_for(theorem, axiom = "MI"):
     #TODO check theorem and axiom are valid strings
