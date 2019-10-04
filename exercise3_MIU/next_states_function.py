@@ -10,69 +10,85 @@
 
 # I've chosen to use regular expressions to test for each of the rules
 import re
+import numpy as np
+import pandas as pd
 
-def next_states(s, source_level = 0, element_counter = 0):
+def next_states(s, route_to_source_from_axiom = []):
     #TODO - check s is a string containing only characters M, I or U.
-    # Set up the empty list for the return result
     list_of_next_states = []
-    list_of_next_states_details = []
+    list_of_next_states_with_route = []
+    
+    # Define a helper function that will:
+    # - check for duplicates;
+    # - create route to each state;
+    # - appending the given next state(s) to the master lists.
+    def remove_duplicates_and_add_route(source, route_to_source, rule_applied, list_of_next_states_from_rule, master_list_of_next_states, master_list_of_next_states_with_route):
+        # Check that list has entries
+        if len(list_of_next_states_from_rule) > 0:
+            # First remove duplicates by using the set function.
+            # TODO assumption here is that duplicates won't occur between different rules, only within a rule.
+            rule_next_states_deduped =  list(set(list_of_next_states_from_rule))
+            
+            # Extend the route to the state by adding a new tuple.
+            # This creates a list of tuples describing the sequence of rules required to move from axiom to the current state being captured.
+            route_tuple = (source, rule_applied)
+            route_to_next_state = route_to_source + [route_tuple]
+            
+            # Now build a list of sub-lists where each sub_list comprises two elements:
+            # 1 next state;
+            # 2 the route that was taken to achieve that state as defined as a list of tuples
+            rule_next_states_with_route = []
+            for state in rule_next_states_deduped:
+                rule_next_states_with_route.append([state, route_to_next_state])
+            # Extend the master lists
+            master_list_of_next_states = master_list_of_next_states + rule_next_states_deduped
+            master_list_of_next_states_with_route = master_list_of_next_states_with_route + rule_next_states_with_route
+            # Return the master lists
+        return master_list_of_next_states, master_list_of_next_states_with_route
 
     # Rule 1
     # Fist rule is that any string ending in an I can have a U added to it:
     # xI -> xIU
     # This rule is singular - ie, if it applies it will only either none or one entry to the agenda.
-    # Check if the last character in the current state is an I, if so append a U
+    # Check if the last character in the current state is an I, if so append a U.
+    next_states_rule1 = []
     if s[-1] == "I":
-        next_state_rule1 = s + "U"
-        list_of_next_states.append(next_state_rule1)
-        list_of_next_states_details.append([source_level, element_counter, "R1", next_state_rule1])
+        next_states_rule1.append(s + "U")
+        list_of_next_states, list_of_next_states_with_route = remove_duplicates_and_add_route(s, route_to_source_from_axiom, "R1", next_states_rule1, list_of_next_states, list_of_next_states_with_route)
 
     # Rule 2
     # Second rule is that any string beginning in M can have the remainder of the string "doubled":
     # Mx -> Mxx
     # This rule will always apply assuming that the "axiom" for this will always be MI.
-    # Check if the first character is an M, if so "double" the remaining part of the string
+    # Check if the first character is an M, if so "double" the remaining part of the string.
+    next_states_rule2 = []
     if s[0] == "M":
         string_to_multiply = s[1:]
-        next_state_rule2 = "M" + (2 * string_to_multiply)
-        list_of_next_states.append(next_state_rule2)
-        list_of_next_states_details.append([source_level, element_counter, "R2", next_state_rule2])
+        next_states_rule2.append("M" + (2 * string_to_multiply))
+        list_of_next_states, list_of_next_states_with_route = remove_duplicates_and_add_route(s, route_to_source_from_axiom, "R2", next_states_rule2, list_of_next_states, list_of_next_states_with_route)
     
     # Rule 3
-    # The third rule is that any string with three consecutive I's can be replaced with U - including at the end of the string!:
-    # xIIIy -> xUy, where y can be an empty string
+    # The third rule is that any string with three consecutive I's can be replaced with U:
+    # xIIIy -> xUy, where x and/or y can be an empty string
     # This rule potentially returns multiple matches - ie, so it could contribute multiple entries to the agenda.
-    start_index = 0
-    find_index_list = []
-    while s.find('III', start_index) > 0:
-        find_index = s.find('III', start_index)
-        find_index_list.append(find_index)
-        start_index = find_index + 1
-    for index in find_index_list:
-        start = index
-        end = index + 3
-        next_state_rule3 = s[:start] + "U" + s[end:]
-        list_of_next_states.append(next_state_rule3)
-        list_of_next_states_details.append([source_level, element_counter, "R3", next_state_rule3])
+    length_of_source_state = len(s)
+    next_states_rule3 = []
+    for index in range (0, length_of_source_state - 2):
+        string_to_compare = s[index:index + 3]
+        if string_to_compare == "III":
+            next_states_rule3.append(s[:index] + "U" + s[index + 3:])
+    list_of_next_states, list_of_next_states_with_route = remove_duplicates_and_add_route(s, route_to_source_from_axiom, "R3", next_states_rule3, list_of_next_states, list_of_next_states_with_route)
 
     # Rule 4
-    # The fourth rule is that any two consecutive U's can be deleted
-    # xUUy -> xy
-    start_index = 0
-    find_index_list = []
-    while s.find('UU', start_index) > 0:
-        find_index = s.find('UU', start_index)
-        find_index_list.append(find_index)
-        start_index = find_index + 1
-    for index in find_index_list:
-        start = index
-        end = index + 3
-        next_state_rule3 = s[:start] + "" + s[end:]
-        list_of_next_states.append(next_state_rule3)
-        list_of_next_states_details.append([source_level, element_counter, "R3", next_state_rule3])
-    
-    # Check for duplicates...
+    # The fourth rule is that any two consecutive U's can be deleted:
+    # xUUy -> , where x and/or y can be an empty string
+    # This rule potentially returns multiple matches - ie, so it could contribute multiple entries to the agenda.
+    next_states_rule4 = []
+    for index in range (0, length_of_source_state - 1):
+        string_to_compare = s[index:index + 2]
+        if string_to_compare == "UU":
+            next_states_rule4.append(s[:index] + "" + s[index + 2:])
+    list_of_next_states, list_of_next_states_with_route = remove_duplicates_and_add_route(s, route_to_source_from_axiom, "R4", next_states_rule4, list_of_next_states, list_of_next_states_with_route)
 
-    return list_of_next_states
+    return list_of_next_states, list_of_next_states_with_route
 
-next_states("MIIII")
