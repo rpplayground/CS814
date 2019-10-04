@@ -8,10 +8,13 @@
 # 
 
 #%%
-from MIU_next_states import next_states
+from exercise3_MIU.MIU_next_states import next_states
 
 #%%
 next_states("MI")
 
 #%%
 next_states("MII")
+
+
+#%%
