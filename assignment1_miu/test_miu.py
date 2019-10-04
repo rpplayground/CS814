@@ -1,5 +1,5 @@
 import pytest
-from .MIU_next_states import next_states as next_states
+from .miu_next_states import next_states as next_states
 
 def test_next_states_level0():
     assert next_states("MI")[0] == ["MIU", "MII"]

@@ -8,7 +8,7 @@
 # 
 
 #%%
-from .MIU_next_states import next_states
+from .miu_next_states import next_states
 
 #%%
 next_states("MI")
