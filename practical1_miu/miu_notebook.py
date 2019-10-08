@@ -6,8 +6,8 @@
 # 
 
 #%%
-from assignment1_miu.miu_next_states import next_states
-from assignment1_miu.miu_search_for import search_for
+from practical1_miu.miu_next_states import next_states
+from practical1_miu.miu_search_for import search_for
 
 #%%
 next_states("MI")
