@@ -1,5 +1,6 @@
 # University of Strathclyde -  MSc Artificial Intelligence and Applications
-## CS814 - Artificial Intelligence for Autonomous Systems - Assignment 1 - MIU
+## CS814 - Artificial Intelligence for Autonomous Systems
+## Assignment 1 - MIU
 File Created first created 4th October 2019 by Barry Smart.
 
 ### Overview
@@ -25,13 +26,18 @@ Thinking about defining the specific environment in which our AI will be operati
 ### Approach
 We were given some guidance about how to tackle this first assigment:
 - Begin with writing a function next_states(s), which given a string s will return all possible strings that can be derived from s (using the rules defined above) in a **single step**;
-- Then think about applying a "breadth-first" search approach.
+- Then think about applying a "breadth-first" search approach - write a function search_for(t), that given goal state t will find the shortest path to achieving the goal;
+
+### Breadth First Search
+Breadth first search is a simple approach to tackling a *uninformed search* or *blind search*.
+
+
 
 ### Solution
 Description of solution here...
 
 ### Environment used to build the solution
-See my seperate document **TO DO** that describes my general setup for writing Python.
+See seperate README document **TO DO** that describes my general setup for writing Python.
 
 ### How to run it
 Point towards notebook to get insight into how to run it...
