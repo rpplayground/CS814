@@ -15,6 +15,8 @@ next_states("MI")
 #%%
 next_states("MII")
 
+#%%
+next_states("MIIIIIIII")
 
 #%%
 axiom, theorem, route_to_state_from_axiom, number_of_steps = search_for("MIIU")
