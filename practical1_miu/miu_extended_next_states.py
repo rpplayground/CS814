@@ -8,19 +8,14 @@
 # See body of function for description of each rule.
 # The function returns a simple list of possible next states AND a more complex list that rolls up the route to each of those states.
 
-# I've chosen to use regular expressions to test for each of the rules
-import re
-import numpy as np
-import pandas as pd
-
-def next_states(s, route_to_source_from_axiom = []):
+def extended_next_states(s, route_to_source_from_axiom = []):
     #TODO - check s is a string containing only characters M, I or U.
     list_of_next_states = []
     list_of_next_states_with_route = []
     
-    # Define a helper function that will:
-    # - check for duplicates;
-    # - create route to each state;
+    # Define a helper function that will take a list of next states and other contect in order to:
+    # - remove duplicates;
+    # - create route to each state by extending the route to source, and;
     # - appending the given next state(s) to the master lists.
     def remove_duplicates_and_add_route(source, route_to_source, rule_applied, list_of_next_states_from_rule, master_list_of_next_states, master_list_of_next_states_with_route):
         # Check that list has entries
@@ -29,8 +24,8 @@ def next_states(s, route_to_source_from_axiom = []):
             # TODO assumption here is that duplicates won't occur between different rules, only within a rule.
             rule_next_states_deduped =  list(set(list_of_next_states_from_rule))
             
-            # Extend the route to the state by adding a new tuple.
-            # This creates a list of tuples describing the sequence of rules required to move from axiom to the current state being captured.
+            # Extend the route to the state by concatenating a new tuple to the end of the route list.
+            # This enables it to maintain a description of the sequence of steps required to move from axiom to each state that has been expanded.
             route_tuple = (source, rule_applied)
             route_to_next_state = route_to_source + [route_tuple]
             
@@ -59,8 +54,8 @@ def next_states(s, route_to_source_from_axiom = []):
     # Rule 2
     # Second rule is that any string beginning in M can have the remainder of the string "doubled":
     # Mx -> Mxx
-    # This rule will always apply assuming that the "axiom" for this will always be MI.
-    # Check if the first character is an M, if so "double" the remaining part of the string.
+    # This rule will always apply assuming that the "axiom" will always begin with M.
+    # Nevertheless I will still check if the first character is an M, and if so "double" the remaining part of the string.
     next_states_rule2 = []
     if s[0] == "M":
         string_to_multiply = s[1:]
