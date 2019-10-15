@@ -8,7 +8,7 @@
 # - associated notebook for insights into how this performs;
 # - assocaited set of pytest unit tests.
 
-from .miu_next_states import next_states
+from miu_next_states import next_states
 
 def search_for(theorem, axiom = "MI"):
     #TODO check theorem and axiom are valid strings
