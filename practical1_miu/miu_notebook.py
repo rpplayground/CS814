@@ -16,6 +16,7 @@ os.chdir(current_working_directory + "\\practical1_miu")
 #%%
 from miu_next_states import next_states
 from miu_extend_path import extend_path
+from miu_breadth_first_search import breadth_first_search
 
 #%% [markdown]
 ## Next States
@@ -38,11 +39,9 @@ extend_path(["MI"])
 #%%
 extend_path(["MI", "MII", "MIIII"])
 
-#%%
-# axiom, theorem, route_to_state_from_axiom, number_of_steps = search_for("MIIU")
-# print("Solution to tranform", axiom, "to", theorem, "can be completed in", number_of_steps, "steps as follows:")
-# for i in route_to_state_from_axiom:
-#     print("Apply rule", i[1], "to", i[0])
-
+#%% [markdown]
+## Breadth First Search
 
 #%%
+breadth_first_search("MUI")
+
