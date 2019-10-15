@@ -17,6 +17,8 @@ os.chdir(current_working_directory + "\\practical1_miu")
 from miu_next_states import next_states
 from miu_extend_path import extend_path
 from miu_breadth_first_search import breadth_first_search
+from miu_depth_limited_dfs import depth_limited_dfs
+from miu_iterative_deepening import iterative_deepening
 
 #%% [markdown]
 ## Next States
@@ -40,8 +42,26 @@ extend_path(["MI"])
 extend_path(["MI", "MII", "MIIII"])
 
 #%% [markdown]
-## Breadth First Search
+## Comparing Algorithms : MUII
 
 #%%
-breadth_first_search("MUI")
+breadth_first_search("MUII")
+
+#%%
+depth_limited_dfs("MUII", 8)
+
+#%%
+iterative_deepening("MUII")
+
+#%% [markdown]
+## Comparing Algorithms : MIIIII
+
+#%%
+breadth_first_search("MIIIII")
+
+#%%
+depth_limited_dfs("MIIIII", 8)
+
+#%%
+iterative_deepening("MIIIII")
 
