@@ -9,15 +9,15 @@
 # We will use the next_states function, so let's import that:
 from miu_extend_path import extend_path
 
-def depth_limited_dfs (goal_string, limit):
+def depth_limited_dfs (goal_string, limit, extend_path_counter = 0, maximum_agenda_length = 0):
     # TODO - check that goal string contains only the letters M, I or U.
     # Initialise the agenda
     agenda = [["MI"]]
-    # Initialise the counter for calls to next_states
-    extend_path_counter = 0
-    # Maximum agenda size
-    maximum_agenga_size = 0
     while agenda != []:
+        # Track the maximum size that the  agenda reaches
+        agenda_length = len(agenda)
+        if agenda_length > maximum_agenda_length:
+            maximum_agenda_length = agenda_length
         # Pop the first path from the agenda
         current_path = agenda.pop(0)
         # Extract the last state from the current path
@@ -35,9 +35,5 @@ def depth_limited_dfs (goal_string, limit):
             extend_path_counter = extend_path_counter + 1
     if agenda == []:
         current_path = []
-    else:
-        print("Length of goal path:", len(current_path))
-        print("Size of the agenda:", len(agenda))
-        print("Number of calls to extend_path:", extend_path_counter)
-    # Return path to the goal if one has been found, otherwise this will be empty.
-    return current_path
+    goal_path = current_path
+    return goal_path, extend_path_counter, agenda_length, maximum_agenda_length

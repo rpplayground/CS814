@@ -12,11 +12,13 @@ from miu_depth_limited_dfs import depth_limited_dfs
 def iterative_deepening(goal_string):
     # TODO - check that goal string contains only the letters M, I or U.
     # Initialise depth limit
+    extend_path_counter = 0
+    maximum_agenda_length = 0
     depth_limit = 1
     while True:
-        goal_path = depth_limited_dfs(goal_string, depth_limit)
+        goal_path, extend_path_counter, agenda_length, maximum_agenda_length = depth_limited_dfs(goal_string, depth_limit, extend_path_counter, maximum_agenda_length)
         if goal_path == []:
             depth_limit = depth_limit + 1
         else:
             break     
-    return goal_path
+    return goal_path, extend_path_counter, agenda_length, maximum_agenda_length

@@ -16,8 +16,11 @@ def breadth_first_search(goal_string):
     # Initialise the counter for calls to next_states
     extend_path_counter = 0
     # Maximum agenda size
-    maximum_agenga_size = 0
+    maximum_agenda_length = 0
     while True:
+        agenda_length = len(agenda)
+        if agenda_length > maximum_agenda_length:
+            maximum_agenda_length = agenda_length
         # Pop the first path from the agenda
         current_path = agenda.pop(0)
         # Extract the last state from the current path
@@ -33,9 +36,5 @@ def breadth_first_search(goal_string):
             agenda = agenda + new_paths
             # Increment the extend_paths counter by 1
             extend_path_counter = extend_path_counter + 1
-        
-    print("Length of goal path:", len(current_path))
-    print("Number of calls to extend_path:", extend_path_counter)
-    print("Size of the agenda at point goal found:", len(agenda))
-    # Return a list of paths.
-    return current_path
+    goal_path = current_path        
+    return goal_path, extend_path_counter, agenda_length, maximum_agenda_length
