@@ -15,7 +15,7 @@ import os
 #%%
 os.getcwd()
 #%%
-os. chdir('c:\\Users\\Barry\\Documents\\GitHub\\CS814\\practical1_miu')
+os. chdir('c:\\Users\\Barry\\GitHub\\CS814\\practical1_miu')
 
 
 #%%
@@ -27,8 +27,8 @@ from miu_iterative_deepening import iterative_deepening
 from miu_compare_algorithms import compare_algorithms
 
 #%% [markdown]
-###Part 1 - Next States
-#The following calls illustrate the core "next_states" function working.
+### Part 1 - Next States
+# The following calls illustrate the core "next_states" function working.
 
 #%%
 next_states("MI")
@@ -43,8 +43,8 @@ next_states("MIIIIIIII")
 next_states("MUII")
 
 #%% [markdown]
-###Part 2 - Extend Path
-#The following provide examples of the "extend_paths" function in action.
+### Part 2 - Extend Path
+# The following provide examples of the "extend_paths" function in action.
 
 #%%
 extend_path(["MI"])
@@ -53,8 +53,8 @@ extend_path(["MI"])
 extend_path(["MI", "MII", "MIIII"])
 
 #%% [markdown]
-##Part 3 - Breadth-First Search
-#The following example shows the breadth-first search running with a reasonably challenging goal.
+## Part 3 - Breadth-First Search
+# The following example shows the breadth-first search running with a reasonably challenging goal.
 goal = "MUII"
 
 #%%
@@ -71,22 +71,22 @@ goal_path, extend_path_counter, agenda_length, maximum_agenda_length = breadth_f
 print_results("Breadth-First Search", goal_path, extend_path_counter, agenda_length, maximum_agenda_length)
 
 #%% [markdown]
-##Part 4a - Depth Limited Depth-First Search
-#Now running the depth limited DFS algorithm with the same goal as above.
+## Part 4a - Depth Limited Depth-First Search
+# Now running the depth limited DFS algorithm with the same goal as above.
 #%%
 goal_path, extend_path_counter, agenda_length, maximum_agenda_length = depth_limited_dfs(goal,8)
 print_results("Depth Limited Depth-First Search", goal_path, extend_path_counter, agenda_length, maximum_agenda_length)
 
 #%% [markdown]
-##Part 4b - Iterative Deepening
-#Now running the depth limited DFS algorithm with the same goal as above.
+## Part 4b - Iterative Deepening
+# Now running the depth limited DFS algorithm with the same goal as above.
 #%%
-goal_path, extend_path_counter, agenda_length, maximum_agenda_length = iterative_deepening(goal,8)
+goal_path, extend_path_counter, agenda_length, maximum_agenda_length = iterative_deepening(goal)
 print_results("Iterative Deepening", goal_path, extend_path_counter, agenda_length, maximum_agenda_length)
 
 #%% [markdown]
-##Part 4c - Comparing Algorithms
-#Now writing a more industrial grade set of functions to allow the different algorithms to be compared.
+## Part 4c - Comparing Algorithms
+# Now writing a more industrial grade set of functions to allow the different algorithms to be compared.
 #%%
 comparison_list = compare_algorithms(["MUII", "MIUIUIUIU", "MIIIIUIIIIU", "MUIUI", "MUIIUII", "MIIIII"], 10)
 
