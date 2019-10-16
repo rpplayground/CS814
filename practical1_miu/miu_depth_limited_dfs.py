@@ -14,12 +14,12 @@ def depth_limited_dfs (goal_string, limit, extend_path_counter = 0, maximum_agen
     # Initialise the agenda
     agenda = [["MI"]]
     while agenda != []:
-        # Track the maximum size that the  agenda reaches
+        # Pop the first path from the agenda
+        current_path = agenda.pop(0)
+        # Track the maximum size that the agenda reaches
         agenda_length = len(agenda)
         if agenda_length > maximum_agenda_length:
             maximum_agenda_length = agenda_length
-        # Pop the first path from the agenda
-        current_path = agenda.pop(0)
         # Extract the last state from the current path
         last_state = current_path[-1]
         # Compare it with the goal state
