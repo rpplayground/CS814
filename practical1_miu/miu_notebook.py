@@ -15,7 +15,7 @@ import os
 #%%
 os.getcwd()
 #%%
-os. chdir('c:\\Users\\Barry\\GitHub\\CS814\\practical1_miu')
+os. chdir('c:\\Users\\cgb19156\\GitHub\\CS814\\practical1_miu')
 
 
 #%%
@@ -88,7 +88,7 @@ print_results("Iterative Deepening", goal_path, extend_path_counter, agenda_leng
 ## Part 4c - Comparing Algorithms
 # Now writing a more industrial grade set of functions to allow the different algorithms to be compared.
 #%%
-comparison_list = compare_algorithms(["MUII", "MIUIUIUIU", "MIIIIUIIIIU", "MUIUI", "MUIIUII", "MIIIII"], 10)
+comparison_list = compare_algorithms(["MUII", "MIUIUIUIU", "MIIIIUIIIIU", "MUIUI", "MUIIUII", "MUIIUIIU","MIIIII", "MIIIIIU", "MIIIIIUIIIIIU", "MIIIIIUIUIU"], 10)
 
 #%%
 comparison_dataframe = pd.DataFrame.from_records(comparison_list)
