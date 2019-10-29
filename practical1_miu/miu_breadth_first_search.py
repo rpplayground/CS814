@@ -11,8 +11,9 @@ from miu_extend_path import extend_path
 
 def breadth_first_search(goal_string):
     # TODO - check that goal string contains only the letters M, I or U.
-    # Initialise the agenda
+    # Initialise the agenda and visited list
     agenda = [["MI"]]
+    visited_list = []
     # Initialise the counter for calls to next_states
     extend_path_counter = 0
     # Maximum agenda size
@@ -32,7 +33,7 @@ def breadth_first_search(goal_string):
             break
         else:
             # Else we need call the extend_path function
-            new_paths = extend_path(current_path)
+            new_paths, visited_list = extend_path(current_path, visited_list)
             # Then add these paths to the END of the agenda
             agenda = agenda + new_paths
             # Increment the extend_paths counter by 1

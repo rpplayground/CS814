@@ -9,23 +9,24 @@
 # We will use the next_states function, so let's import that:
 from miu_extend_path import extend_path
 
-def depth_limited_dfs(goal_string, limit, visited_list, extend_path_counter = 0, maximum_agenda_length = 0):
+def depth_limited_dfs(goal_string, limit, extend_path_counter = 0, maximum_agenda_length = 0):
     # TODO - check that goal string contains only the letters M, I or U.
-    # Initialise the agenda
+    # Initialise the agenda, goal path and visited list
     agenda = [["MI"]]
     goal_path = []
+    visited_list = []
     # Check if the agenda has been primed with the goal!
     if agenda[0] == goal_string:
         goal_path = agenda[0]
-        return goal_path, extend_path_counter, 0, maximum_agenda_length, visited_list
+        return goal_path, extend_path_counter, 0, maximum_agenda_length
     while agenda != []:
-        # Pop the first path from the agenda
-        current_path = agenda.pop(0)
-        path_length = len(current_path)
         # Track the maximum size that the agenda reaches
         agenda_length = len(agenda)
         if agenda_length > maximum_agenda_length:
             maximum_agenda_length = agenda_length
+        # Pop the first path from the agenda
+        current_path = agenda.pop(0)
+        path_length = len(current_path)
         if path_length <= limit:
             # Call the extend_path function
             new_paths, visited_list = extend_path(current_path, visited_list)
@@ -39,6 +40,4 @@ def depth_limited_dfs(goal_string, limit, visited_list, extend_path_counter = 0,
                 else:
                     # Then add these paths to the START of the agenda
                     agenda.insert(0, path)
-        else:
-            break
-    return goal_path, extend_path_counter, agenda_length, maximum_agenda_length, visited_list
+    return goal_path, extend_path_counter, agenda_length, maximum_agenda_length

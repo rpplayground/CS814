@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 import os
 
 #%%
-os.getcwd()
+working_directory = os.getcwd()
 #%%
-os. chdir('c:\\Users\\cgb19156\\GitHub\\CS814\\practical1_miu')
+os. chdir(working_directory + "\\practical1_miu")
 
 
 #%%
@@ -47,10 +47,10 @@ next_states("MUII")
 # The following provide examples of the "extend_paths" function in action.
 
 #%%
-extend_path(["MI"])
+extend_path(["MI"], [])
 
 #%%
-extend_path(["MI", "MII", "MIIII"])
+extend_path(["MI", "MII", "MIIII"], [])
 
 #%% [markdown]
 ## Part 3 - Breadth-First Search
