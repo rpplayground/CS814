@@ -10,19 +10,22 @@
 # We will use the next_states function, so let's import that:
 from miu_next_states import next_states
 
-def extend_path(p):
+def extend_path(p, visited_list):
     # TODO - check p is a single level list containing states that are constructed only of the letters M, I or U.
     # Create an empty list into which we will build the list of lists that will be returned by the function
-    list_of_all_possible_paths = []
+    list_of_paths = []
     # Pick the last state s form the path.
     intermediate_state = p[-1]
     # Compute next states from that element:
     list_of_next_states = next_states(intermediate_state)
     # Iterate through each state returned
     for state in list_of_next_states:
-        # Create new paths for each of the next states.
-        extended_path = p.copy()
-        extended_path.append(state)
-        list_of_all_possible_paths = list_of_all_possible_paths + [extended_path]
+        if state not in visited_list:
+            # Add the state to the visited list
+            visited_list.append(state)
+            # Create new paths for each of the next states.
+            extended_path = p.copy()
+            extended_path.append(state)
+            list_of_paths.append(extended_path)
     # Return a list of paths.
-    return list_of_all_possible_paths
+    return list_of_paths, visited_list

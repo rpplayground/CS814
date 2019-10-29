@@ -15,8 +15,10 @@ def iterative_deepening(goal_string):
     extend_path_counter = 0
     maximum_agenda_length = 0
     depth_limit = 1
+    visited_list = []
     while True:
-        goal_path, extend_path_counter, agenda_length, maximum_agenda_length = depth_limited_dfs(goal_string, depth_limit, extend_path_counter, maximum_agenda_length)
+        goal_path, extend_path_counter, agenda_length, maximum_agenda_length, visited_list = \
+            depth_limited_dfs(goal_string, depth_limit, visited_list, extend_path_counter, maximum_agenda_length)
         if goal_path == []:
             depth_limit = depth_limit + 1
         else:
