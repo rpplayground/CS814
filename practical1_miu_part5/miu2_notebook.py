@@ -9,15 +9,28 @@
 #%%
 import pandas as pd
 import numpy as np
+import os
+import sys
+
+#%%
+sys.path
+
+#%%
+working_directory = os.getcwd()
+#%%
+os. chdir(working_directory + "\\practical1_miu_part5")
+
+
+#%%
 from miu2_main import iterate_through_goals
 
 #%%
-list_of_goals = [ "MIU", "MIIII", "MUI", "MIIIIUIIIIU", "MIUUIIIIU", "MIUUIUU", "MIUUIUUIUUIUU", "MIUUIUUIIUU", "MIUUIUUII", "MIUUIUUIIU" ]
+list_of_goals = [ "MIU", "MIIII", "MUI", "MIIIIUIIIIU", "MIUUIUU", "MIUUIUUIUUIUU", "MIUUIUUIIUU", "MIUUIUUII", "MIUUIUUIIU", "MUUI", "MIIIUI", "MIIUII", "MIUIII", "MUIIII" ]
 
 #%%
 results_dataframe = iterate_through_goals(list_of_goals)
 
 # %%
-print(results_dataframe)
+results_dataframe
 
 #%%
