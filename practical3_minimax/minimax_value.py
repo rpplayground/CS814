@@ -50,6 +50,9 @@ def terminal_test(state):
             utility_value = 1
     return terminal_state, utility_value
 
+#%% [markdown]
+## Vanilla Minimax Functions
+
 #%%
 def max_value(state, depth):
     # Check if one of four terminal states has been reached:
@@ -57,7 +60,9 @@ def max_value(state, depth):
     if not terminal_state:
         depth = depth + 1
         for next_state in successors(state, depth):
-            utility_value = min_value(next_state, depth)
+            v_ = min_value(next_state, depth)
+            if v_ > utility_value:
+                utility_value = v_
     return utility_value
 
 #%%
@@ -67,7 +72,9 @@ def min_value(state, depth):
     if not terminal_state:
         depth = depth + 1
         for next_state in successors(state, depth):
-            utility_value = max_value(next_state, depth)
+            v_ = max_value(next_state, depth)
+            if v_ < utility_value:
+                utility_value = v_
     return utility_value
 
 #%%
@@ -82,35 +89,73 @@ def minimax_value(state):
     print("Time taken in seconds: ", end - start)
     return utility_value
 
+#%% [markdown]
+## Minimax Functions With Alpha Beta Pruning
+
+
+#%%
+def max_value_abp(state, alpha, beta, depth):
+    # Check if one of four terminal states has been reached:
+    terminal_state, utility_value = terminal_test(state)
+    if not terminal_state:
+        depth = depth + 1
+        for next_state in successors(state, depth):
+            v_ = min_value_abp(next_state, alpha, beta, depth)
+            if v_ > utility_value:
+                utility_value = v_
+            if v_ >= beta:
+                return utility_value
+            if v_ > alpha:
+                alpha = v_
+    return utility_value
+
+#%%
+def min_value_abp(state, alpha, beta, depth):
+    # Check if one of four terminal states has been reached:
+    terminal_state, utility_value = terminal_test(state)
+    if not terminal_state:
+        depth = depth + 1
+        for next_state in successors(state, depth):
+            v_ = max_value_abp(next_state, alpha, beta, depth)
+            if v_ < utility_value:
+                utility_value = v_
+            if v_ <= alpha:
+                return utility_value
+            if v_ < beta:
+                beta = v_
+    return utility_value
+
+#%%
+def minimax_value_abp(state):
+    start = time.time()
+    depth = 0
+    alpha = 0
+    beta = 0
+    if state[1] == 1:
+        utility_value = max_value_abp(state, alpha, beta, depth)
+    else:
+        utility_value = min_value_abp(state, alpha, beta, depth)
+    end = time.time()
+    print("Time taken in seconds: ", end - start)
+    return utility_value
+
+
+#%%
+minimax_value_abp(([3, 1, 1], 1))
 #%%
 successors(([3,2],1), 1)
 
 #%%
-successors(([2,2], 2), 5)
-
-#%%
 terminal_test(([1], 1))
-#%%
-terminal_test(([1], 2))
-#%%
-terminal_test(([], 1))
-#%%
-terminal_test(([], 2))
-
-#%%
-terminal_test(([2], 1))
-
-#%%
-terminal_test(([2], 2))
 
 #%%
 max_value(([3,2], 1), 5)
 
 #%%
-min_value(([3,2], 2))
+min_value(([3,2], 2), 0)
 
 #%%
-minimax_value(([3,2], 1))
+minimax_value(([3, 2], 1))
 
 #%%
 minimax_value(([3, 2], 2))
@@ -123,3 +168,22 @@ minimax_value(([2, 2], 1))
 
 #%%
 minimax_value(([3, 3, 3], 1))
+
+#%%
+minimax_value_abp(([3, 3, 3], 1))
+
+#%%
+minimax_value_abp(([2,2], 1))
+
+#%%
+minimax_value(([2, 2, 2], 1))
+
+#%%
+minimax_value_abp(([2, 2, 2], 1))
+
+#%%
+minimax_value(([3, 1, 1], 1))
+
+#%%
+minimax_value_abp(([3, 3, 3, 3, 3, 3], 1))
+
