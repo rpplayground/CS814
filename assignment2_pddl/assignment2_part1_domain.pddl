@@ -13,7 +13,7 @@
 	(:action move_truck
 	:parameters (?truck ?from ?to)
 	:precondition 
-	( and
+		( and
 			(location_to_location ?from ?to)
 			(truck ?truck)
 			(location ?from)

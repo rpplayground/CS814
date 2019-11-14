@@ -89,6 +89,12 @@ def minimax_value(state):
     print("Time taken in seconds: ", end - start)
     return utility_value
 
+
+#%%
+minimax_value(([3, 1, 1], 1))
+
+
+
 #%% [markdown]
 ## Minimax Functions With Alpha Beta Pruning
 
@@ -142,47 +148,6 @@ def minimax_value_abp(state):
 
 #%%
 minimax_value_abp(([3, 1, 1], 1))
-#%%
-successors(([3,2],1), 1)
-
-#%%
-terminal_test(([1], 1))
-
-#%%
-max_value(([3,2], 1), 5)
-
-#%%
-min_value(([3,2], 2), 0)
-
-#%%
-minimax_value(([3, 2], 1))
-
-#%%
-minimax_value(([3, 2], 2))
-
-#%%
-minimax_value(([5, 4], 1))
-
-#%%
-minimax_value(([2, 2], 1))
-
-#%%
-minimax_value(([3, 3, 3], 1))
-
-#%%
-minimax_value_abp(([3, 3, 3], 1))
-
-#%%
-minimax_value_abp(([2,2], 1))
-
-#%%
-minimax_value(([2, 2, 2], 1))
-
-#%%
-minimax_value_abp(([2, 2, 2], 1))
-
-#%%
-minimax_value(([3, 1, 1], 1))
 
 #%%
 minimax_value_abp(([3, 3, 3, 3, 3, 3], 1))
