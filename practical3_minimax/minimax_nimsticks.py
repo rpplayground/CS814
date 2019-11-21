@@ -30,7 +30,7 @@ def successors(state, depth):
     successors = [(all_new_piles[i], next_player) for i in range(len(all_new_piles))\
         if i == 0 or all_new_piles[i] != all_new_piles[i-1]]
     print("--- Depth: " + str(depth) + " ---State: " + str(state))
-    print(successors)
+    #print(successors)
     return successors
 
 #%%
@@ -91,7 +91,7 @@ def minimax_value(state):
 
 
 #%%
-minimax_value(([3, 1, 1], 1))
+#minimax_value(([3, 1, 1], 1))
 
 
 
@@ -147,8 +147,8 @@ def minimax_value_abp(state):
 
 
 #%%
-minimax_value_abp(([3, 1, 1], 1))
+#minimax_value_abp(([3, 1, 1], 1))
 
 #%%
-minimax_value_abp(([3, 3, 3, 3, 3, 3], 1))
+#minimax_value_abp(([3, 3, 3, 3, 3, 3], 1))
 
